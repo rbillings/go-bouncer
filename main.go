@@ -35,6 +35,12 @@ func main() {
 			Usage:  "database DSN (https://github.com/go-sql-driver/mysql#dsn-data-source-name)",
 			EnvVar: "BOUNCER_DB_DSN",
 		},
+		cli.StringFlag{
+			Name:   "stub-root-url",
+			Value:  "https://stubdownloader.prod.mozaws.net/",
+			Usage:  "Root url of service used to service modified stub installers",
+			EnvVar: "STUB_ROOT_URL",
+		},
 	}
 	app.RunAndExitOnError()
 }
@@ -47,8 +53,9 @@ func Main(c *cli.Context) {
 	defer db.Close()
 
 	bouncerHandler := &BouncerHandler{
-		db:        db,
-		CacheTime: time.Duration(c.Int("cache-time")) * time.Second,
+		db:          db,
+		CacheTime:   time.Duration(c.Int("cache-time")) * time.Second,
+		StubRootURL: c.String("stub-root-url"),
 	}
 
 	healthHandler := &HealthHandler{
