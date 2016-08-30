@@ -58,12 +58,16 @@ func compareVersions(a, b string) int {
 
 		aInt, err := strconv.Atoi(strings.TrimRightFunc(verA, isNotNumber))
 		if err != nil {
+			log.Println("aInt strconv:", err)
 			aInt = 0
 		}
 		bInt, err := strconv.Atoi(strings.TrimRightFunc(verB, isNotNumber))
 		if err != nil {
+			log.Println("bInt strconv:", err)
 			bInt = 0
 		}
+
+		log.Printf("aInt: %d, bInt: %d", aInt, bInt)
 
 		if aInt > bInt {
 			return 1
@@ -93,6 +97,7 @@ func tBirdSha1Product(productSuffix string) string {
 		possibleVersion = tBirdWinXPLastBeta
 	}
 
+	log.Printf("tBirdSha1Product: productSuffix: %s ver: %s possible: %s", productSuffix, ver, possibleVersion.Version)
 	if compareVersions(ver, possibleVersion.Version) == -1 {
 		return productSuffix
 	}
