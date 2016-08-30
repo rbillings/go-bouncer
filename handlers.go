@@ -70,11 +70,15 @@ func compareVersions(a, b string) int {
 		log.Printf("aInt: %d, bInt: %d", aInt, bInt)
 
 		if aInt > bInt {
+			log.Printf("TRUE aInt > bInt: %d > %d", aInt, bInt)
 			return 1
 		}
+		log.Printf("NOT TRUE aInt > bInt: %d > %d", aInt, bInt)
 		if aInt < bInt {
+			log.Printf("TRUE: aInt < bInt: %d > %d", aInt, bInt)
 			return -1
 		}
+		log.Printf("NOT TRUE: aInt < bInt: %d > %d", aInt, bInt)
 	}
 	return 0
 }
